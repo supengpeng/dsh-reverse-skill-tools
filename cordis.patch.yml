@@ -1,0 +1,9 @@
+# DSH bundle profile patch.
+# Wraps the upstream @dhicoc/dsh-reverse-skill pack (already installed as a skill
+# provider) into ONE native-tools plugin. The upstream package root is resolved
+# from the running profile via `baseUrl`, so this file never hardcodes a path.
+- insert:
+    - id: reverse-skill-tools
+      name: '@local/reverse-skill-tools'
+      config:
+        upstreamRoot: !!js process.getBuiltinModule('node:path').dirname(process.getBuiltinModule('node:path').dirname(process.getBuiltinModule('node:module').createRequire(baseUrl).resolve('@dhicoc/dsh-reverse-skill')))
